@@ -24,48 +24,51 @@ async function renderPokemonOverview() {
         currentPokemon = await response.json();
         renderPokemonInfo(currentPokemon);
     }
-
-   
 }
 
 
 function renderPokemonInfo(currentPokemon) {
     let container = document.getElementById('pokemon-overview-container');
     let pokemon = currentPokemon;
-        
-    container.innerHTML += getPokemonHTML(pokemon); 
+    let pokemonType = pokemon['types'][0]['type']['name']; // Typ des Pokémons
 
+    let pokedexClass = 'pokedex';
+    if (pokemonType === 'grass') {
+        pokedexClass += ' grass';
+    } else if (pokemonType === 'fire') {
+        pokedexClass += ' fire';
+    } else if (pokemonType === 'water') {
+        pokedexClass += ' water';
+    } else if (pokemonType === 'normal') {
+        pokedexClass += ' normal';
+    } else if (pokemonType === 'bug') {
+        pokedexClass += ' bug';
+    }
+
+    container.innerHTML += getPokemonHTML(pokemon, pokedexClass);
 }
 
-
-function getPokemonHTML(pokemon) {
+function getPokemonHTML(pokemon, pokedexClass) {
     let pokemonName = capitalizeFirstLetter(pokemon['name']); // Name
     let pokemonImage = pokemon['sprites']['front_default']; // Bild
-    let pokemonTypeHTML = '';
+    let pokemonTypes = '';
 
     for (let i = 0; i < pokemon['types'].length; i++) {
         let pokemonType = pokemon['types'][i]['type']['name']; // Type
-        pokemonTypeHTML += `<div class="pokemon-type">${pokemonType}</div>`;
+        pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;
     }
-
-   /*  for (let i = 0; i < pokemon['types'][i].length; i++) {
-        
-    }
-    let pokemonType = pokemon['types'][0]['type']['name']; // Type */
 
     return /*html*/`
-    <div class="overview-pokemon-container">
-        <div class="pokedex">
-            <h1>${pokemonName}</h1>
-            <div class="overview-image-container">
-                <div>${pokemonTypeHTML}</div>
-                <div><img class="pokemonImage" src="${pokemonImage}" alt="pokemon image"></div> 
-            </div>     
-        </div>
-        
+    <div class="${pokedexClass}">
+        <h1>${pokemonName}</h1>
+        <div class="overview-image-container">
+            <div>${pokemonTypes}</div>
+            <div><img class="pokemonImage" src="${pokemonImage}" alt="pokemon image"></div> 
+        </div>     
     </div>    
     `;
 }
+
 
 
 

@@ -9,34 +9,61 @@ h1 {
     text-align: center;
 }
 
+
 .main-content {
     padding: 24px;
 }
+
 
 .pokemon-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 24px;
+    gap: 36px;
 }
 
+
 .pokedex {
+    position: relative;
     height: 180px;
     width: 200px;
-    background-color: #FB6C6C;
     color: white;
     padding: 24px;
     border-radius: 40px;
+    box-shadow: 0px 3px 8px -1px black;
 }
+
+.pokedex:hover {
+    font-size: 0;
+    opacity: 0.8;
+}
+
+.pokedex:hover .pokemon-type {
+    background-color: transparent;
+}
+
+.pokedex:hover .pokemonImage {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+
 
 
 .overview-image-container{
     display: flex;
     justify-content: center;
     align-items: center;
-   
 }
+
+
 
 .pokemon-type {
     background-color: rgba(0,0,0,0.4);
@@ -46,12 +73,14 @@ h1 {
     margin: 4px;
 }
 
+
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.45) ;
 }
+
 
 .headline {
     display: flex;
@@ -60,10 +89,37 @@ h1 {
     gap: 8px;
 }
 
+
 .searchfield {
     padding-right: 12px;
 }
 
+
 .search-input {
     height: 24px;
+}
+
+
+.grass {
+    background-color: green;
+}
+
+
+.fire {
+    background-color: orange;
+}
+
+
+.water {
+    background-color: blue;
+}
+
+
+.normal {
+    background-color: grey;
+}
+
+
+.bug {
+    background-color: red;
 }
