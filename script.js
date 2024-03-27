@@ -39,20 +39,33 @@ function renderPokemonInfo(currentPokemon) {
 
 
 function getPokemonHTML(pokemon) {
+    let pokemonName = capitalizeFirstLetter(pokemon['name']); // Name
+    let pokemonImage = pokemon['sprites']['front_default']; // Bild
+    let pokemonTypeHTML = '';
+
+    for (let i = 0; i < pokemon['types'].length; i++) {
+        let pokemonType = pokemon['types'][i]['type']['name']; // Type
+        pokemonTypeHTML += `<div class="pokemon-type">${pokemonType}</div>`;
+    }
+
+   /*  for (let i = 0; i < pokemon['types'][i].length; i++) {
+        
+    }
+    let pokemonType = pokemon['types'][0]['type']['name']; // Type */
+
     return /*html*/`
     <div class="overview-pokemon-container">
         <div class="pokedex">
-            <h1>${pokemon['name']}</h1>
-        </div>    
-        <div class="info-container">
-            <div class="overview-image-container"><img class="pokemonImage" src="${pokemon['sprites']['front_default']}" alt="pokemon image"></div> 
+            <h1>${pokemonName}</h1>
+            <div class="overview-image-container">
+                <div>${pokemonTypeHTML}</div>
+                <div><img class="pokemonImage" src="${pokemonImage}" alt="pokemon image"></div> 
+            </div>     
         </div>
+        
     </div>    
     `;
 }
-
-/* let pokemonName = document.getElementById('pokemonName').innerHTML = currentPokemon['name'];
-let pokemonImage = document.getElementById('pokemonImage').src = `${currentPokemon['sprites']['front_default']}`; */
 
 
 
@@ -72,3 +85,8 @@ function searchNames() {
         
     }
 }
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+

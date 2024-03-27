@@ -4,6 +4,11 @@ body {
     box-sizing: border-box;
 }
 
+
+h1 {
+    text-align: center;
+}
+
 .main-content {
     padding: 24px;
 }
@@ -11,36 +16,34 @@ body {
 .pokemon-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 24px;
 }
 
 .pokedex {
-    min-height: 20vh;
+    height: 180px;
+    width: 200px;
     background-color: #FB6C6C;
     color: white;
     padding: 24px;
-    display: flex;
-    justify-content: center;
+    border-radius: 40px;
 }
 
-.pokemonImage {
-    margin-top: -250px;
-    width: 260px;
-    margin-left: 60px;
-}
-
-.info-container {
-    background-color: white;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-    margin-top: -40px;
-    min-height: 100px;
-}
 
 .overview-image-container{
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.pokemon-type {
+    background-color: rgba(0,0,0,0.4);
+    text-align: center;
+    border-radius: 40px;
+    padding: 6px;
+    margin: 4px;
 }
 
 .header {
