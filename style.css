@@ -34,14 +34,17 @@ h1 {
     box-shadow: 0px 3px 8px -1px black;
 }
 
+
 .pokedex:hover {
     font-size: 0;
     opacity: 0.8;
 }
 
+
 .pokedex:hover .pokemon-type {
     background-color: transparent;
 }
+
 
 .pokedex:hover .pokemonImage {
     cursor: pointer;
@@ -55,14 +58,11 @@ h1 {
 }
 
 
-
-
 .overview-image-container{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 
 
 .pokemon-type {
