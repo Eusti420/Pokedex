@@ -100,37 +100,14 @@ h1 {
 }
 
 
-.grass {
-    background-color: green;
-}
-
-
-.fire {
-    background-color: orange;
-}
-
-
-.water {
-    background-color: blue;
-}
-
-
-.normal {
-    background-color: grey;
-}
-
-
-.bug {
-    background-color: red;
-}
-
-
 .load-btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 64px;
 }
+
+
 
 
 .load-more-pokemon-btn {
@@ -153,3 +130,59 @@ h1 {
     transition-duration: 200ms;
     transition-timing-function: ease-in-out;
 }
+
+.pokedex.poison {
+    background-color: #9b30ff;
+}
+
+
+.pokedex.electric {
+    background-color: #FFCE4B
+}
+
+
+.pokedex.ground {
+    background-color: #ca8179
+}
+
+
+.pokedex.fairy {
+    background-color: #ff69b4;
+}
+
+
+.pokedex.fighting {
+    background-color: #ff6f61;
+}
+
+.grass {
+    background-color: green;
+}
+
+
+.fire {
+    background-color: #F7786B
+}
+
+.water {
+    background-color: #58ABF6
+}
+
+.normal {
+    background-color: grey;
+}
+
+.bug {
+    background-color: #2CDAB1
+}
+
+/* Hintergrundfarbe hellgrau für rock */
+.pokedex.rock {
+    background-color: #d3d3d3;
+}
+
+/* Hintergrundfarbe #8e70e1 für psychic */
+.pokedex.psychic {
+    background-color: #8e70e1;
+}
+

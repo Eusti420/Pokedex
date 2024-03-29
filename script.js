@@ -31,21 +31,43 @@ function renderPokemonInfo(currentPokemon, index) {
     let pokemon = currentPokemon;
     let pokemonType = pokemon['types'][0]['type']['name']; 
 
-    let pokedexClass = 'pokedex';
-    if (pokemonType === 'grass') {
-        pokedexClass += ' grass';
-    } else if (pokemonType === 'fire') {
-        pokedexClass += ' fire';
-    } else if (pokemonType === 'water') {
-        pokedexClass += ' water';
-    } else if (pokemonType === 'normal') {
-        pokedexClass += ' normal';
-    } else if (pokemonType === 'bug') {
-        pokedexClass += ' bug';
-    }
+    let pokedexClass = getPokedexClass(pokemonType);
 
-    container.innerHTML += getPokemonHTML(pokemon, pokedexClass, index); // Übergabe des Index index
+    container.innerHTML += getPokemonHTML(pokemon, pokedexClass, index);
 }
+
+function getPokedexClass(pokemonType) {
+    switch(pokemonType) {
+        case 'grass':
+            return 'pokedex grass';
+        case 'fire':
+            return 'pokedex fire';
+        case 'water':
+            return 'pokedex water';
+        case 'normal':
+            return 'pokedex normal';
+        case 'bug':
+            return 'pokedex bug';
+        case 'poison':
+            return 'pokedex poison';
+        case 'electric':
+            return 'pokedex electric';
+        case 'ground':
+            return 'pokedex ground';
+        case 'fairy':
+            return 'pokedex fairy';
+        case 'fighting':
+            return 'pokedex fighting';
+        case 'rock':
+            return 'pokedex rock';
+        case 'psychic':
+            return 'pokedex psychic';
+        default:
+            return 'pokedex';
+    }
+}
+
+
 
 function getPokemonHTML(pokemon, pokedexClass, index) {
     let pokemonName = capitalizeFirstLetter(pokemon['name']); 
