@@ -12,7 +12,6 @@ async function loadPokemon() {
     let allPokemons = await response.json();
 
     allPokemon.push(allPokemons);
-
     renderPokemonOverview();
 }
 
@@ -22,7 +21,7 @@ async function renderPokemonOverview() {
         let url = allPokemon[0]['results'][i]['url'];
         let response = await fetch(url);
         currentPokemon = await response.json();
-        renderPokemonInfo(currentPokemon, i); // Übergabe des Index i
+        renderPokemonInfo(currentPokemon, i); 
     }
 }
 
@@ -30,43 +29,50 @@ function renderPokemonInfo(currentPokemon, index) {
     let container = document.getElementById('pokemon-overview-container');
     let pokemon = currentPokemon;
     let pokemonType = pokemon['types'][0]['type']['name']; 
-
     let pokedexClass = getPokedexClass(pokemonType);
 
     container.innerHTML += getPokemonHTML(pokemon, pokedexClass, index);
 }
 
-function getPokedexClass(pokemonType) {
-    switch(pokemonType) {
-        case 'grass':
-            return 'pokedex grass';
-        case 'fire':
-            return 'pokedex fire';
-        case 'water':
-            return 'pokedex water';
-        case 'normal':
-            return 'pokedex normal';
-        case 'bug':
-            return 'pokedex bug';
-        case 'poison':
-            return 'pokedex poison';
-        case 'electric':
-            return 'pokedex electric';
-        case 'ground':
-            return 'pokedex ground';
-        case 'fairy':
-            return 'pokedex fairy';
-        case 'fighting':
-            return 'pokedex fighting';
-        case 'rock':
-            return 'pokedex rock';
-        case 'psychic':
-            return 'pokedex psychic';
-        default:
-            return 'pokedex';
-    }
-}
 
+function getPokedexClass(pokemonType) {
+    let pokedexClass = 'pokedex';
+
+    if (pokemonType === 'grass') {
+        pokedexClass += ' grass';
+    } else if (pokemonType === 'fire') {
+        pokedexClass += ' fire';
+    } else if (pokemonType === 'water') {
+        pokedexClass += ' water';
+    } else if (pokemonType === 'normal') {
+        pokedexClass += ' normal';
+    } else if (pokemonType === 'bug') {
+        pokedexClass += ' bug';
+    } else if (pokemonType === 'poison') {
+        pokedexClass += ' poison';
+    } else if (pokemonType === 'electric') {
+        pokedexClass += ' electric';
+    } else if (pokemonType === 'ground') {
+        pokedexClass += ' ground';
+    } else if (pokemonType === 'fairy') {
+        pokedexClass += ' fairy';
+    } else if (pokemonType === 'fighting') {
+        pokedexClass += ' fighting';
+    } else if (pokemonType === 'rock') {
+        pokedexClass += ' rock';
+    } else if (pokemonType === 'psychic') {
+        pokedexClass += ' psychic';
+    } else if (pokemonType === 'ghost') {
+        pokedexClass += ' ghost';
+    } else if (pokemonType === 'ice') {
+        pokedexClass += ' ice';
+    } else if (pokemonType === 'dragon') {
+        pokedexClass += ' dragon';
+    } else if (pokemonType === 'dark') {
+        pokedexClass += ' dark';
+    }
+    return pokedexClass;
+}
 
 
 function getPokemonHTML(pokemon, pokedexClass, index) {

@@ -108,8 +108,6 @@ h1 {
 }
 
 
-
-
 .load-more-pokemon-btn {
     border-radius: 40px;
     padding-top: 12px;
@@ -176,13 +174,28 @@ h1 {
     background-color: #2CDAB1
 }
 
-/* Hintergrundfarbe hellgrau für rock */
+
 .pokedex.rock {
     background-color: #d3d3d3;
 }
 
-/* Hintergrundfarbe #8e70e1 für psychic */
 .pokedex.psychic {
     background-color: #8e70e1;
+}
+
+.ghost {
+    background-color: #ddd495;
+}
+
+.ice {
+    background-color: #A9E4FF;
+}
+
+.dragon {
+    background-color: #FF5A00;
+}
+
+.dark {
+    background-color: #3C3C3C;
 }
 
