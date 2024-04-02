@@ -157,16 +157,18 @@ async function loadMorePokemon() {
 
 function openPokemonDetailView(index) {
     let pokemonDetailContainer = document.getElementById('pokemon-detail-view');
+    pokemonDetailContainer.classList.remove('d-hide');
+    pokemonDetailContainer.classList.add('d-block');
     pokemonDetailContainer.innerHTML = '';
 
     let pokemon = currentLoadedPokemon[index];
     let pokemonName = capitalizeFirstLetter(pokemon['name']);
-    let pokemonImage = currentLoadedPokemon[index]['sprites']['front_shiny'];
-    let pokemonType = currentLoadedPokemon[index]['types'][0]['type']['name'];
+    let pokemonImage = pokemon['sprites']['front_shiny'];
+    let pokemonType = pokemon['types'][0]['type']['name'];
     let pokedexDetailClass = getPokedexDetailClass(pokemonType);
     let pokemonTypes = '';
-    for (let i = 0; i < currentLoadedPokemon[index]['types'].length; i++) {
-        let pokemonType = currentLoadedPokemon[index]['types'][i]['type']['name'];
+    for (let i = 0; i < pokemon['types'].length; i++) {
+        let pokemonType = pokemon['types'][i]['type']['name'];
         pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;
         
     }
@@ -174,21 +176,19 @@ function openPokemonDetailView(index) {
 
     let pokemonDetailHTML = /*html*/`
 
-    <div class="pokemon-detail-container">
+    <div>
         <div id="pokemon${index}" class="${pokedexDetailClass}">
             <h1 class="pokemon-name">${pokemonName}</h1>
             <div class="overview-image-container">
-                <div><img class="pokemon-detial-image" src="${pokemonImage}" alt="pokemon image"></div> 
+                <div><img class="pokemon-detail-image" src="${pokemonImage}" alt="pokemon image"></div> 
             </div>     
             <div>${pokemonTypes}</div>
         </div> 
-        <!-- Weitere Details hier hinzufügen -->
+        <div></div>
     </div>
     `;
 
     pokemonDetailContainer.innerHTML = pokemonDetailHTML;
-
-    console.log('onclick');
 }
 
 
