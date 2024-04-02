@@ -78,6 +78,47 @@ function getPokedexClass(pokemonType) {
 }
 
 
+function getPokedexDetailClass(pokemonType) {
+    let pokedexDetailClass = 'pokedex-detail-view';
+
+    if (pokemonType === 'grass') {
+        pokedexDetailClass += ' grass';
+    } else if (pokemonType === 'fire') {
+        pokedexDetailClass += ' fire';
+    } else if (pokemonType === 'water') {
+        pokedexDetailClass += ' water';
+    } else if (pokemonType === 'normal') {
+        pokedexDetailClass += ' normal';
+    } else if (pokemonType === 'bug') {
+        pokedexDetailClass += ' bug';
+    } else if (pokemonType === 'poison') {
+        pokedexDetailClass += ' poison';
+    } else if (pokemonType === 'electric') {
+        pokedexDetailClass += ' electric';
+    } else if (pokemonType === 'ground') {
+        pokedexDetailClass += ' ground';
+    } else if (pokemonType === 'fairy') {
+        pokedexDetailClass += ' fairy';
+    } else if (pokemonType === 'fighting') {
+        pokedexDetailClass += ' fighting';
+    } else if (pokemonType === 'rock') {
+        pokedexDetailClass += ' rock';
+    } else if (pokemonType === 'psychic') {
+        pokedexDetailClass += ' psychic';
+    } else if (pokemonType === 'ghost') {
+        pokedexDetailClass += ' ghost';
+    } else if (pokemonType === 'ice') {
+        pokedexDetailClass += ' ice';
+    } else if (pokemonType === 'dragon') {
+        pokedexDetailClass += ' dragon';
+    } else if (pokemonType === 'dark') {
+        pokedexDetailClass += ' dark';
+    }
+    return pokedexDetailClass;
+}
+
+
+
 function getPokemonHTML(pokemon, pokedexClass, index) {
     let pokemonName = capitalizeFirstLetter(pokemon['name']); 
     let pokemonImage = pokemon['sprites']['front_shiny']; 
@@ -90,7 +131,7 @@ function getPokemonHTML(pokemon, pokedexClass, index) {
 
     return /*html*/`
     <div class="pokemon-container">
-        <div id="pokemon${index}" class="${pokedexClass}">
+        <div onclick="openPokemonDetailView(${index})" id="pokemon${index}" class="${pokedexClass}">
             <h1 class="pokemon-name">${pokemonName}</h1>
             <div class="overview-image-container">
                 <div>${pokemonTypes}</div>
@@ -114,10 +155,42 @@ async function loadMorePokemon() {
 }
 
 
+function openPokemonDetailView(index) {
+    let pokemonDetailContainer = document.getElementById('pokemon-detail-view');
+    pokemonDetailContainer.innerHTML = '';
 
-function openPokemonDetailView() {
-    console.log('onclick',)
+    let pokemon = currentLoadedPokemon[index];
+    let pokemonName = capitalizeFirstLetter(pokemon['name']);
+    let pokemonImage = currentLoadedPokemon[index]['sprites']['front_shiny'];
+    let pokemonType = currentLoadedPokemon[index]['types'][0]['type']['name'];
+    let pokedexDetailClass = getPokedexDetailClass(pokemonType);
+    let pokemonTypes = '';
+    for (let i = 0; i < currentLoadedPokemon[index]['types'].length; i++) {
+        let pokemonType = currentLoadedPokemon[index]['types'][i]['type']['name'];
+        pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;
+        
+    }
+
+
+    let pokemonDetailHTML = /*html*/`
+
+    <div class="pokemon-detail-container">
+        <div id="pokemon${index}" class="${pokedexDetailClass}">
+            <h1 class="pokemon-name">${pokemonName}</h1>
+            <div class="overview-image-container">
+                <div><img class="pokemon-detial-image" src="${pokemonImage}" alt="pokemon image"></div> 
+            </div>     
+            <div>${pokemonTypes}</div>
+        </div> 
+        <!-- Weitere Details hier hinzufügen -->
+    </div>
+    `;
+
+    pokemonDetailContainer.innerHTML = pokemonDetailHTML;
+
+    console.log('onclick');
 }
+
 
 
 
