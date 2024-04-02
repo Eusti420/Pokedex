@@ -1,5 +1,5 @@
 let allPokemon = [];
-let currentPokemon;
+let currentLoadedPokemon = [];
 
 function init() {
     loadPokemon()
@@ -20,14 +20,17 @@ async function renderPokemonOverview() {
     for (let i = 0; i < allPokemon[0]['results'].length; i++) {
         let url = allPokemon[0]['results'][i]['url'];
         let response = await fetch(url);
-        currentPokemon = await response.json();
-        renderPokemonInfo(currentPokemon, i); 
+        let loadedPokemon = await response.json();
+
+        currentLoadedPokemon.push(loadedPokemon);
+
+        renderPokemonInfo(loadedPokemon, i); 
     }
 }
 
-function renderPokemonInfo(currentPokemon, index) {
+function renderPokemonInfo(loadedPokemon, index) {
     let container = document.getElementById('pokemon-overview-container');
-    let pokemon = currentPokemon;
+    let pokemon = loadedPokemon;
     let pokemonType = pokemon['types'][0]['type']['name']; 
     let pokedexClass = getPokedexClass(pokemonType);
 
@@ -77,7 +80,7 @@ function getPokedexClass(pokemonType) {
 
 function getPokemonHTML(pokemon, pokedexClass, index) {
     let pokemonName = capitalizeFirstLetter(pokemon['name']); 
-    let pokemonImage = pokemon['sprites']['front_default']; 
+    let pokemonImage = pokemon['sprites']['front_shiny']; 
     let pokemonTypes = '';
 
     for (let i = 0; i < pokemon['types'].length; i++) {
@@ -86,13 +89,15 @@ function getPokemonHTML(pokemon, pokedexClass, index) {
     }
 
     return /*html*/`
-    <div id="pokemon${index}" class="${pokedexClass}">
-        <h1>${pokemonName}</h1>
-        <div class="overview-image-container">
-            <div>${pokemonTypes}</div>
-            <div><img class="pokemonImage" src="${pokemonImage}" alt="pokemon image"></div> 
-        </div>     
-    </div>    
+    <div class="pokemon-container">
+        <div id="pokemon${index}" class="${pokedexClass}">
+            <h1 class="pokemon-name">${pokemonName}</h1>
+            <div class="overview-image-container">
+                <div>${pokemonTypes}</div>
+                <div><img class="pokemonImage" src="${pokemonImage}" alt="pokemon image"></div> 
+            </div>     
+        </div> 
+    </div>   
     `;
 }
 
@@ -110,26 +115,31 @@ async function loadMorePokemon() {
 
 
 
-
-
-// aktuell nur Namen, render Bedingung muss der if Abfrage hinzugefügt werden. Vorher richtiges HTML Gerüst und Struktur
-function searchNames() {
-    let search = document.getElementById('search').value;
-    search = search.toLowerCase();
-
-    let list = document.getElementById('pokedex');
-   
-
-    for (let i = 0; i < currentPokemon.length; i++) {
-        const pokemonName = currentPokemon['names'][index];
-        if (pokemonName.toLocalLowerCase().includes(search)) {
-            list.innerHTML = renderPokemonOverview();
-        }
-        
-    }
+function openPokemonDetailView() {
+    console.log('onclick',)
 }
+
+
+
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+// aktuell nur Namen, render Bedingung muss der if Abfrage hinzugefügt werden. Vorher richtiges HTML Gerüst und Struktur
+function filterPokemon() {
+    let search = document.getElementById('search').value.toLowerCase();
+    let pokemonContainers = document.querySelectorAll('.pokemon-container');
+
+    pokemonContainers.forEach(pokemonContainer => {
+        let pokemonName = pokemonContainer.querySelector('.pokemon-name').textContent.toLowerCase();
+        
+        if (pokemonName.startsWith(search)) {
+            pokemonContainer.style.display = '';
+        } else {
+            pokemonContainer.style.display = 'none';
+        }
+    });
 }
 

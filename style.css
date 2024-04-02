@@ -99,6 +99,10 @@ h1 {
     height: 24px;
 }
 
+.pokemon-container {
+    font-size: 14px;
+}
+
 
 .load-btn-container {
     display: flex;
