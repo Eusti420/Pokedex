@@ -1,5 +1,6 @@
 let allPokemon = [];
 let currentLoadedPokemon = [];
+let currentIndex = 0;
 
 function init() {
     loadPokemon()
@@ -24,7 +25,8 @@ async function renderPokemonOverview() {
 
         currentLoadedPokemon.push(loadedPokemon);
 
-        renderPokemonInfo(loadedPokemon, i); 
+        renderPokemonInfo(loadedPokemon, currentIndex); // Verwende currentIndex statt i
+        currentIndex++; // Inkrementiere currentIndex
     }
 }
 
@@ -149,9 +151,10 @@ async function loadMorePokemon() {
     let morePokemon = await response.json();
 
     allPokemon = [];
+   
     
+    allPokemon.push(morePokemon);
     
-    await allPokemon.push(morePokemon);
     renderPokemonOverview();
 }
 
