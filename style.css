@@ -103,7 +103,12 @@ h1 {
     z-index: 1;
     backdrop-filter: blur(4px);
     padding-top: 120px;
-  }
+}
+
+
+.pokedex-detail-view:hover {
+    cursor: pointer;
+}
 
 
 .pokemon-type {
