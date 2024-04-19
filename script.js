@@ -178,7 +178,7 @@ function openPokemonDetailView(index) {
     let pokemonDetailHTML = /*html*/`
 
     <div>
-        <div onclick="closePokemonDetailView(${index})" id="pokemon${index}" class="${pokedexDetailClass}">
+        <div onclick="closePokemonDetailView()" id="pokemon${index}" class="${pokedexDetailClass}">
             <h1 class="pokemon-name">${pokemonName}</h1>
             <div class="overview-image-container">
                 <div><img class="pokemon-detail-image" src="${pokemonImage}" alt="pokemon image"></div> 
@@ -193,7 +193,7 @@ function openPokemonDetailView(index) {
 }
 
 
-function closePokemonDetailView(index) {
+function closePokemonDetailView() {
     let pokemonDetailContainer = document.getElementById('pokemon-detail-view');
     pokemonDetailContainer.classList.add('d-hide');
     pokemonDetailContainer.classList.remove('d-block');
