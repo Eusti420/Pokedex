@@ -169,14 +169,22 @@ function openPokemonDetailView(index) {
     let pokemonTypes = '';
     for (let i = 0; i < pokemon['types'].length; i++) {
         let pokemonType = pokemon['types'][i]['type']['name'];
-        pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;}
+        pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;
+    }
+    let statsNames = [];
+    let statsValues = [];
+    pokemon.stats.forEach(stat => {
+        statsNames.push(stat.stat.name);
+        statsValues.push(stat.base_stat);
+    });
 
     pokemonDetailContainer.classList.remove('d-hide');
     pokemonDetailContainer.classList.add('d-block');
     pokemonDetailContainer.innerHTML = '';
     pokemonDetailContainer.innerHTML = pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage, pokemonTypes);
-    createPokemonChart();
+    createPokemonChart(statsNames, statsValues);
 }
+
 
 
 function pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage, pokemonTypes) {
@@ -188,7 +196,7 @@ function pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage,
                 <div><img class="pokemon-detail-image" src="${pokemonImage}" alt="pokemon image"></div> 
             </div>     
             <div>${pokemonTypes}</div>
-            <div class="chart-container"><canvas id="myChart"></canvas></div>
+            <div style="height: 260px" class="chart-container"><canvas id="myChart"></canvas></div>
         </div> 
         
     </div>
@@ -196,30 +204,39 @@ function pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage,
 }
 
 
-function createPokemonChart() {
-    const ctx = document.getElementById('myChart');
+function createPokemonChart(statsNames, statsValues) {
+    const config = document.getElementById('myChart');
+    const backgroundColors = [
+        'rgba(255, 99, 132, 0.5)',   
+        'rgba(54, 162, 235, 0.5)',   
+        'rgba(255, 206, 86, 0.5)',   
+        'rgba(75, 192, 192, 0.5)',   
+        'rgba(153, 102, 255, 0.5)',  
+        'rgba(255, 159, 64, 0.5)'    
+    ];
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        axis: 'y',
-        label: 'Attribute',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-        indexAxis: 'y',
-        scales: {
-            y: {
-            beginAtZero: true
-            }
-      }
-    }
-  });
+    new Chart(config, {
+        type: 'bar',
+        data: {
+            labels: statsNames,
+            datasets: [{
+                label: 'Attribute',
+                data: statsValues,
+                backgroundColor: backgroundColors, 
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            scales: {y: {beginAtZero: true}},
+            maintainAspectRatio: false,
+            responsive: true,
+        }
+    });
+
+    
 }
+
+
 
 
 function closePokemonDetailView() {
