@@ -153,7 +153,7 @@ async function loadMorePokemon() {
     allPokemon = [];
    
     
-    allPokemon.push(morePokemon);
+    await allPokemon.push(morePokemon);
     
     renderPokemonOverview();
 }
@@ -161,10 +161,6 @@ async function loadMorePokemon() {
 
 function openPokemonDetailView(index) {
     let pokemonDetailContainer = document.getElementById('pokemon-detail-view');
-    pokemonDetailContainer.classList.remove('d-hide');
-    pokemonDetailContainer.classList.add('d-block');
-    pokemonDetailContainer.innerHTML = '';
-
     let pokemon = currentLoadedPokemon[index];
     let pokemonName = capitalizeFirstLetter(pokemon['name']);
     let pokemonImage = pokemon['sprites']['front_shiny'];
@@ -173,26 +169,56 @@ function openPokemonDetailView(index) {
     let pokemonTypes = '';
     for (let i = 0; i < pokemon['types'].length; i++) {
         let pokemonType = pokemon['types'][i]['type']['name'];
-        pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;
-        
-    }
+        pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;}
+
+    pokemonDetailContainer.classList.remove('d-hide');
+    pokemonDetailContainer.classList.add('d-block');
+    pokemonDetailContainer.innerHTML = '';
+    pokemonDetailContainer.innerHTML = pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage, pokemonTypes);
+    createPokemonChart();
+}
 
 
-    let pokemonDetailHTML = /*html*/`
-
-    <div>
+function pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage, pokemonTypes) {
+    return /*html*/`
+        <div>
         <div onclick="closePokemonDetailView()" id="pokemon${index}" class="${pokedexDetailClass}">
             <h1 class="pokemon-name">${pokemonName}</h1>
             <div class="overview-image-container">
                 <div><img class="pokemon-detail-image" src="${pokemonImage}" alt="pokemon image"></div> 
             </div>     
             <div>${pokemonTypes}</div>
+            <div class="chart-container"><canvas id="myChart"></canvas></div>
         </div> 
-        <div></div>
+        
     </div>
     `;
+}
 
-    pokemonDetailContainer.innerHTML = pokemonDetailHTML;
+
+function createPokemonChart() {
+    const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        axis: 'y',
+        label: 'Attribute',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+        indexAxis: 'y',
+        scales: {
+            y: {
+            beginAtZero: true
+            }
+      }
+    }
+  });
 }
 
 
@@ -202,9 +228,6 @@ function closePokemonDetailView() {
     pokemonDetailContainer.classList.remove('d-block');
     pokemonDetailContainer.innerHTML = '';
 }
-
-
-
 
 
 function capitalizeFirstLetter(string) {
