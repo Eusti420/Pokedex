@@ -189,7 +189,7 @@ function openPokemonDetailView(index) {
 
 function pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage, pokemonTypes) {
     return /*html*/`
-        <div>
+        <button class="sliderArrow" onclick="previousPokemon(${index - 1})"><</button>
         <div onclick="closePokemonDetailView()" id="pokemon${index}" class="${pokedexDetailClass}">
             <h1 class="pokemon-name">${pokemonName}</h1>
             <div class="overview-image-container">
@@ -198,8 +198,8 @@ function pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage,
             <div>${pokemonTypes}</div>
             <div style="height: 260px" class="chart-container"><canvas id="myChart"></canvas></div>
         </div> 
-        
-    </div>
+        <button class="sliderArrow" onclick="nextPokemon(${index + 1})">></button>
+    
     `;
 }
 
@@ -231,12 +231,8 @@ function createPokemonChart(statsNames, statsValues) {
             maintainAspectRatio: false,
             responsive: true,
         }
-    });
-
-    
+    });   
 }
-
-
 
 
 function closePokemonDetailView() {
@@ -244,6 +240,22 @@ function closePokemonDetailView() {
     pokemonDetailContainer.classList.add('d-hide');
     pokemonDetailContainer.classList.remove('d-block');
     pokemonDetailContainer.innerHTML = '';
+}
+
+
+function nextPokemon(index) {
+    if (index == allPokemon.length) {
+        index = 0;
+    }
+    openPokemonDetailView(index);
+}
+
+
+function previousPokemon(index) {
+    if (index == -1) {
+        index = allPokemon.length -1;
+    }
+    openPokemonDetailView(index);
 }
 
 

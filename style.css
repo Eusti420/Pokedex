@@ -121,7 +121,21 @@ h1 {
 }
 
 
-
+.sliderArrow {
+    font-size: 48px;
+    padding: 20px;
+    background: unset;
+    border: 0;
+    color: #f2f2f2;
+  }
+  
+.sliderArrow:hover {
+    cursor: pointer;
+    opacity: 0.3;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+    transition: 1s ease;
+}
 
 .pokemon-type {
     background-color: rgba(0,0,0,0.4);
