@@ -10,6 +10,11 @@ h1 {
 }
 
 
+.title-image {
+    height: 164px;
+}
+
+
 .main-content {
     padding: 24px;
 }
@@ -158,8 +163,6 @@ h1 {
 .headline {
     display: flex;
     align-items: center;
-    padding: 12px;
-    gap: 8px;
 }
 
 
@@ -206,27 +209,27 @@ h1 {
     transition-timing-function: ease-in-out;
 }
 
-.pokedex.poison {
+.poison {
     background-color: #9b30ff;
 }
 
 
-.pokedex.electric {
+.electric {
     background-color: #FFCE4B
 }
 
 
-.pokedex.ground {
+.ground {
     background-color: #ca8179
 }
 
 
-.pokedex.fairy {
+.fairy {
     background-color: #ff69b4;
 }
 
 
-.pokedex.fighting {
+.fighting {
     background-color: #ff6f61;
 }
 
@@ -251,12 +254,11 @@ h1 {
     background-color: #2CDAB1
 }
 
-
-.pokedex.rock {
+.rock {
     background-color: #d3d3d3;
 }
 
-.pokedex.psychic {
+.psychic {
     background-color: #8e70e1;
 }
 

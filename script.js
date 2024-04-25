@@ -25,8 +25,8 @@ async function renderPokemonOverview() {
 
         currentLoadedPokemon.push(loadedPokemon);
 
-        renderPokemonInfo(loadedPokemon, currentIndex); // Verwende currentIndex statt i
-        currentIndex++; // Inkrementiere currentIndex
+        renderPokemonInfo(loadedPokemon, currentIndex); 
+        currentIndex++; 
     }
 }
 
@@ -264,19 +264,25 @@ function capitalizeFirstLetter(string) {
 }
 
 
-// aktuell nur Namen, render Bedingung muss der if Abfrage hinzugefügt werden. Vorher richtiges HTML Gerüst und Struktur
 function filterPokemon() {
     let search = document.getElementById('search').value.toLowerCase();
-    let pokemonContainers = document.querySelectorAll('.pokemon-container');
 
-    pokemonContainers.forEach(pokemonContainer => {
-        let pokemonName = pokemonContainer.querySelector('.pokemon-name').textContent.toLowerCase();
+    for (let index = 0; index < currentLoadedPokemon.length; index++) {
+        let pokemonContainer = document.getElementById(`pokemon${index}`);
+        let pokemonName = currentLoadedPokemon[index]['name'].toLowerCase();
         
         if (pokemonName.startsWith(search)) {
             pokemonContainer.style.display = '';
         } else {
             pokemonContainer.style.display = 'none';
         }
-    });
+    }
 }
+
+
+
+
+
+
+
 
