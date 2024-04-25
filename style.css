@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: 'Open Sans';
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 
@@ -278,3 +279,18 @@ h1 {
     background-color: #3C3C3C;
 }
 
+@media (max-width: 599px) {
+    h2 {
+        display: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .header{
+        flex-direction: column;
+    }
+
+    .searchfield {
+        padding-bottom: 24px;
+    }
+}
