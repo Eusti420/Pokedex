@@ -12,6 +12,7 @@ async function loadPokemon() {
     let response = await fetch(url);
     let allPokemons = await response.json();
 
+
     allPokemon.push(allPokemons);
     renderPokemonOverview();
 }
@@ -23,8 +24,8 @@ async function renderPokemonOverview() {
         let response = await fetch(url);
         let loadedPokemon = await response.json();
 
-        currentLoadedPokemon.push(loadedPokemon);
 
+        currentLoadedPokemon.push(loadedPokemon);
         renderPokemonInfo(loadedPokemon, currentIndex); 
         currentIndex++; 
     }
@@ -70,9 +71,9 @@ async function loadMorePokemon() {
     let response = await fetch(url);
     let morePokemon = await response.json();
 
+
     allPokemon = [];
     await allPokemon.push(morePokemon);
-    
     renderPokemonOverview();
 }
 
