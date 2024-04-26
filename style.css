@@ -1,6 +1,8 @@
 body {
     margin: 0;
-    font-family: 'Open Sans';
+    font-family: "Noto Sans", sans-serif;
+    font-style: normal;
+    font-weight: 500;
     box-sizing: border-box;
     overflow-x: hidden;
     scroll-behavior: smooth;
