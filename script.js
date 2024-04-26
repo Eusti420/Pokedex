@@ -151,8 +151,6 @@ async function loadMorePokemon() {
     let morePokemon = await response.json();
 
     allPokemon = [];
-   
-    
     await allPokemon.push(morePokemon);
     
     renderPokemonOverview();
@@ -160,31 +158,35 @@ async function loadMorePokemon() {
 
 
 function openPokemonDetailView(index) {
-    let pokemonDetailContainer = document.getElementById('pokemon-detail-view');
     let pokemon = currentLoadedPokemon[index];
     let pokemonName = capitalizeFirstLetter(pokemon['name']);
     let pokemonImage = pokemon['sprites']['front_shiny'];
     let pokemonType = pokemon['types'][0]['type']['name'];
     let pokedexDetailClass = getPokedexDetailClass(pokemonType);
     let pokemonTypes = '';
-    for (let i = 0; i < pokemon['types'].length; i++) {
-        let pokemonType = pokemon['types'][i]['type']['name'];
-        pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;
-    }
+        for (let i = 0; i < pokemon['types'].length; i++) {
+            let pokemonType = pokemon['types'][i]['type']['name'];
+            pokemonTypes += `<div class="pokemon-type">${pokemonType}</div>`;
+        };
     let statsNames = [];
     let statsValues = [];
     pokemon.stats.forEach(stat => {
         statsNames.push(stat.stat.name);
         statsValues.push(stat.base_stat);
     });
+    renderPokemonDetailView(index, pokemonName, pokemonImage, pokedexDetailClass, pokemonTypes, statsNames, statsValues);
+}
 
+
+function renderPokemonDetailView(index, pokemonName, pokemonImage, pokedexDetailClass, pokemonTypes, statsNames, statsValues) {
+    let pokemonDetailContainer = document.getElementById('pokemon-detail-view');
+    document.body.style.overflowY = 'hidden';
     pokemonDetailContainer.classList.remove('d-hide');
     pokemonDetailContainer.classList.add('d-block');
     pokemonDetailContainer.innerHTML = '';
     pokemonDetailContainer.innerHTML = pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage, pokemonTypes);
     createPokemonChart(statsNames, statsValues);
 }
-
 
 
 function pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage, pokemonTypes) {
@@ -199,7 +201,6 @@ function pokemonDetailHTML(index, pokedexDetailClass, pokemonName, pokemonImage,
             <div style="height: 260px" class="chart-container"><canvas id="myChart"></canvas></div>
         </div> 
         <button class="sliderArrow" onclick="nextPokemon(${index + 1})">></button>
-    
     `;
 }
 
@@ -240,11 +241,12 @@ function closePokemonDetailView() {
     pokemonDetailContainer.classList.add('d-hide');
     pokemonDetailContainer.classList.remove('d-block');
     pokemonDetailContainer.innerHTML = '';
+    document.body.style.overflowY = 'auto';
 }
 
 
 function nextPokemon(index) {
-    if (index == allPokemon.length) {
+    if (index >= currentLoadedPokemon.length) {
         index = 0;
     }
     openPokemonDetailView(index);
@@ -264,25 +266,17 @@ function capitalizeFirstLetter(string) {
 }
 
 
-function filterPokemon() {
+async function filterPokemon() {
     let search = document.getElementById('search').value.toLowerCase();
+    let container = document.getElementById('pokemon-overview-container');
+    container.innerHTML = '';
 
     for (let index = 0; index < currentLoadedPokemon.length; index++) {
-        let pokemonContainer = document.getElementById(`pokemon${index}`);
-        let pokemonName = currentLoadedPokemon[index]['name'].toLowerCase();
-        
+        let pokemon = currentLoadedPokemon[index];
+        let pokemonName = pokemon['name'].toLowerCase();
+
         if (pokemonName.startsWith(search)) {
-            pokemonContainer.style.display = '';
-        } else {
-            pokemonContainer.style.display = 'none';
+            renderPokemonInfo(pokemon, index);
         }
     }
 }
-
-
-
-
-
-
-
-

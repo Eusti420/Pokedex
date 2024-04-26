@@ -3,11 +3,16 @@ body {
     font-family: 'Open Sans';
     box-sizing: border-box;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 
 h1 {
     text-align: center;
+}
+
+h2 {
+    font-size: 30px;
 }
 
 
@@ -112,7 +117,7 @@ h1 {
     bottom: 0;
     z-index: 1;
     backdrop-filter: blur(4px);
-    padding-top: 120px;
+    overflow-y: hidden;
 }
 
 
@@ -280,16 +285,9 @@ h1 {
 }
 
 @media (max-width: 599px) {
-    h2 {
-        display: none;
-    }
-}
-
-@media (max-width: 420px) {
     .header{
         flex-direction: column;
     }
-
     .searchfield {
         padding-bottom: 24px;
     }
