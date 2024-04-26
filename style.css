@@ -4,6 +4,7 @@ body {
     box-sizing: border-box;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    max-width: 1920px;
 }
 
 
@@ -290,5 +291,15 @@ h2 {
     }
     .searchfield {
         padding-bottom: 24px;
+    }
+}
+
+@media (max-width: 420px) {
+    .sliderArrow {
+        margin-top: 200px;
+    }
+
+    .d-block {
+        flex-direction: column;
     }
 }
